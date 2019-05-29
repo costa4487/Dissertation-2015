@@ -1,8 +1,11 @@
 # Green IT - Dynamic Network Topologies
 ## Overview
 The files contained in this repository are designed to test the implementation of a dynamic topology mechanism that performs the following:
-	* Based on overall network traffic, selects nodes to place into a standby state
-	* In the standby state, each node maintains one connection to a node in the active state, but shuts down all other connections. The intent is to make no routing decisions and reduce power consumption; all non-local traffic is forwarded from the standby node to the active node
+
+* Based on overall network traffic, selects nodes to place into a standby state
+
+* In the standby state, each node maintains one connection to a node in the active state, but shuts down all other connections. The intent is to make no routing decisions and reduce power consumption; all non-local traffic is forwarded from the standby node to the active node
+
 The “Dissertation.pdf” document provides a full explanation of the research, development, and implementation of this project.
 
 ## Operation
