@@ -69,7 +69,7 @@ The full implementation details can be found in Chapter 4 of the “Dissertation
 
 ### Controller
 
-The centralized controller alternates between collecting traffic data from each of the nodes and using the data to determine the optimal topology at that point in time. The controller acts as an sFlow collector, and the sFlow messages sent by each node are used to construct the matrix of inter-node traffic flows. 
+The centralized controller alternates between collecting traffic data from each of the nodes and using the data to determine the optimal topology at that point in time. The controller acts as an sFlow collector, and the sFlow messages sent by each node are used to construct the matrix of inter-node traffic flows. The description below details the effects of the source code contained in the files [traffic.cpp](https://github.com/costa4487/Dissertation-2015/blob/master/traffic.cpp), [topology.cpp](https://github.com/costa4487/Dissertation-2015/blob/master/topology.cpp), and [topology.h](https://github.com/costa4487/Dissertation-2015/blob/master/topology.h).
 
 #### Main program
 1. Define measurement interval and topology configuration filename, and declare variables 
@@ -140,7 +140,7 @@ The centralized controller alternates between collecting traffic data from each 
 
 ### Node
 
-Each of the nodes must perform initialization operations to ensure their components interact correctly internally and with the rest of the topology. These components include Open vSwitch for topology implementation, NTP to synchronize changes, host container for traffic generation. Once initialized, the node simply checks for topology changes and implements them if appropriate.
+Each of the nodes must perform initialization operations to ensure their components interact correctly internally and with the rest of the topology. These components include Open vSwitch for topology implementation, NTP to synchronize changes, host container for traffic generation. Once initialized, the node simply checks for topology changes and implements them if appropriate. The description below details the effects of the source code contained in the files [PiMain.cpp](https://github.com/costa4487/Dissertation-2015/blob/master/PiMain.cpp), [raspi_config.cpp](https://github.com/costa4487/Dissertation-2015/blob/master/raspi_config.cpp), [libcurl.c](https://github.com/costa4487/Dissertation-2015/blob/master/libcurl.c), [libcurl.h](https://github.com/costa4487/Dissertation-2015/blob/master/libcurl.h), and [raspi_config.h](https://github.com/costa4487/Dissertation-2015/blob/master/raspi_config.h).
 
 #### Main program 
 1. Define interrupt handler that removes Open vSwitch configuration and deletes the local topology configuration file 
@@ -186,7 +186,7 @@ Each of the nodes must perform initialization operations to ensure their compone
 10. Modify the output processing flow tables using the port numbers for each destination node
 
 ### Host
-The nodes each have an LXC container that simulates hosts on the node’s local network, which are used to generate the inter-node traffic and run the tests to measure the impact of the dynamic topology mechanism.
+The nodes each have an LXC container that simulates hosts on the node’s local network, which are used to generate the inter-node traffic and run the tests to measure the impact of the dynamic topology mechanism. The description below details the effects of the source code contained in the files [host.cpp](https://github.com/costa4487/Dissertation-2015/blob/master/host.cpp) and [measure.cpp](https://github.com/costa4487/Dissertation-2015/blob/master/measure.cpp).
 
 #### Traffic generation
 1. Define the traffic generation matrix filenames to be used and declare variables 
