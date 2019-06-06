@@ -137,3 +137,50 @@ The centralized controller alternates between collecting traffic data from each 
 	7. Find maximum link utilisation percentage 
 	8. Return to the start of the loop if the maximum link utilisation is less than the threshold value 
 10. Write the next hop in the shortest path for each source/destination node pair to the specified output file
+
+### Node
+
+Each of the nodes must perform initialization operations to ensure their components interact correctly internally and with the rest of the topology. These components include Open vSwitch for topology implementation, NTP to synchronize changes, host container for traffic generation. Once initialized, the node simply checks for topology changes and implements them if appropriate.
+
+#### Main program 
+1. Define interrupt handler that removes Open vSwitch configuration and deletes the local topology configuration file 
+2. Define the time to wait between modification time checks, the controller’s URL to pass to cURL, and the configuration filename and declare variables
+3. Determine the current node by examining the last character of the hostname
+4. Force the software clock to synchronise with the controller’s NTP server 
+5. Start and initialise the LXC container and Open vSwitch
+6. Enter infinite loop
+	1. Use cURL to get the modification time of the controller’s topology configuration file 
+	2. Test if the remote file’s modification time is later than the local file’s modification time
+	3. If the remote file is newer: 
+		1. Attempt to get the topology configuration file from the controller 
+		2. If unsuccessful, wait for half the defined period of time and return to the start of the loop 
+		3. If successful, update the modification time of the local topology configuration file and implement the topology change 
+	4. If the remote file is not newer: 
+		1. Wait for the defined period of time 
+	5. Return to the start of the loop
+
+#### Initialisation 
+1. Store the current node number (passed by value from calling function) 
+2. Check for presence of PID files to determine if Open vSwitch is running
+	* If Open vSwitch is not running, start it 
+4. Check if the LXC container is running 
+	* If the LXC container is not running, start it 
+6. Get the MAC address of the LXC container’s interface using the ARP cache 
+7. Get the MAC address of the node’s interface that connects to the LXC container using the interface’s address file 
+8. Add the default output handling flow tables to Open vSwitch 
+9. Add the transit and terminating traffic processing flows to flow table zero of Open vSwitch 
+10. Modify the output handling flow table for terminating traffic using the node current number and LXC container and node MAC addresses 
+11. Add the originating traffic flows to flow table zero of Open vSwitch using the current node number 
+12. Add the firewall flow to flow table zero of Open vSwitch
+
+#### Topology change implementation 
+1. Store the topology configuration filename and current node number (passed by value from calling function) 
+2. Declare variables 
+3. Get current time 
+4. Determine topology change time 
+5. Retrieve the next hop node number for each destination node from the configuration file 
+6. Use the interfaces’ IP addresses to determine which node each interface connects to 
+7. Convert the next hop node number from the configuration file into an interface number for each destination node 
+8. Convert the interface number into an Open vSwitch port number for each destination node 
+9. Wait until the local time equals the topology change time 
+10. Modify the output processing flow tables using the port numbers for each destination node
