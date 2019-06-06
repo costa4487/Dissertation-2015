@@ -211,15 +211,21 @@ The impact of the Dynamic Topology Mechanism (DTM) in comparison to OSPF and MPL
 
 **Delay**
 
+<p align="center">
 <img src="https://github.com/costa4487/Dissertation-2015/blob/master/delay.png" width="470px" align="center">
+</p>
 
 **Jitter**
 
+<p align="center">
 <img src="https://github.com/costa4487/Dissertation-2015/blob/master/jitter.png" width="470px" align="center">
+</p>
 
 **Packet loss**
 
+<p align="center">
 <img src="https://github.com/costa4487/Dissertation-2015/blob/master/loss.png" width="370px" align="center">
+</p>
 				     
 **Out of order packets**
 
@@ -227,4 +233,6 @@ No out of order packets were observed in any of the test cases for any implement
 
 **Traffic demand measurement**
 
+<p align="center">
 <img src="https://github.com/costa4487/Dissertation-2015/blob/master/demands.png" align="center">
+</p>
