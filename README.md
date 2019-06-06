@@ -210,23 +210,31 @@ The nodes each have an LXC container that simulates hosts on the node’s local 
 The impact of the Dynamic Topology Mechanism (DTM) in comparison to OSPF and MPLS implementations in the same set of nodes in the same traffic conditions is shown below using the metrics of delay, jitter, packet loss, out of order packets, and the accuracy of the measurement of inter-node traffic demands. A full analysis and discussion of the results can be found in chapter 5 of the “Dissertation.pdf” document
 
 #### Delay
+
 <div align="center">
     <img src=“delay.png" width="470px"</img>
 </div>
 <br>
+
 #### Jitter
+				      
 <div align="center">
     <img src=“jitter.png" width="470px"</img>
 </div>
 <br>
+
 #### Packet loss
+
 <div align="center">
     <img src=“loss.png" width="470px"</img>
 </div>
 <br>
+				     
 #### Out of order packets
 No out of order packets were observed in any of the test cases for any implementation
+
 #### Traffic demand measurement
+
 <div align="center">
     <img src=“demands.png" width="470px"</img>
 </div>
