@@ -184,3 +184,24 @@ Each of the nodes must perform initialization operations to ensure their compone
 8. Convert the interface number into an Open vSwitch port number for each destination node 
 9. Wait until the local time equals the topology change time 
 10. Modify the output processing flow tables using the port numbers for each destination node
+
+### Host
+The nodes each have an LXC container that simulates hosts on the node’s local network, which are used to generate the inter-node traffic and run the tests to measure the impact of the dynamic topology mechanism.
+
+#### Traffic generation
+1. Define the traffic generation matrix filenames to be used and declare variables 
+2. Use the last character of the hostname to determine the node the host is connected to 
+3. Extract the traffic generation data relevant for this host from the traffic generation matrix files for all three testing intervals 
+4. Determine the local time and test start time to synchronise with other nodes 
+5. Wait until the start time 
+6. Prepare for traffic reception from other hosts 
+7. For each of the three testing intervals 
+	1. Start traffic generation to all other host using the traffic generation matrix that corresponds to this testing interval. The traffic generation is set to run for an integer multiple of the testing interval; the first matrix is run for three intervals, the second matrix is run for two intervals, and the third matrix is run from one interval. 
+	2. Start the ping to all other hosts. The ping is set to run for one testing interval 
+	3. Wait for one testing interval, then progress to the next testing interval. If all tests have been performed, end
+
+#### Performance measurement 
+1. Define the file numbers of the iPerf data of interest and declare variables 
+2. For every iPerf statistic file, dump unwanted data and extract the jitter, loss and out of order packet statistics 
+3. For every ping statistic file, dump unwanted data and extract the average round trip time 
+4. Print the collated data to standard output
